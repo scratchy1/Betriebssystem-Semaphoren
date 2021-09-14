@@ -20,3 +20,5 @@ function V(Semaphor s){//Prüfen, ob weitere Prozesse auf den Zutritt zum kritis
  s.wert++;//Zähler um 1 inkrementieren.
  }
 //Die Funktionen P und V müssen atomar sein, d.h. ihre Bearbeitung darf nicht unterbrochen werden.
+/*Auf Multiprozessorsystemen muss zusätzlich sichergestellt werden, dass nicht ein weiterer Prozess gleichzeitig denselben Semaphor durch Aufruf von P oder V manipuliert.
+Lösung: Hier muss man auf busy wait beim Eintritt in P und V zurückgreifen, es gibt keine andere Lösung.*/
