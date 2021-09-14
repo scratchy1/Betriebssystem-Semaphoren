@@ -1,0 +1,21 @@
+Semaphor {
+wert: integer;
+liste: List <Prozess>;
+}
+//Jeder Prozess, der den durch den Semaphor geschützten kritischen Abschnitt betreten will, muss dies durch den Aufruf der Funktion Passieren ankündigen.
+//Da es sich um einen Systemruf handelt, übernimmt das Betriebssystem kurzzeitig die Kontrolle und prüft, ob der Zutritt möglich ist.
+function P(Semaphor s, Prozess p){
+ if(s.wert==0){//Prüfen, ob interner Zähler > 0
+  einhängen(p, s.liste);//Zähler um 1 dekrementieren, der aufrufende Prozess darf den kritischen Abschnitt betreten.
+  p.status:=BLOCKIERT;
+  }else{//Prozess in den Zustand „blockiert“ versetzen und in Warteschlange einreihen.
+  s.wert--;
+  }
+//Beim Beenden des kritischen Abschnitts muss der Prozess die Funktion Verlassen aufrufen. Auch dies ist ein Systemaufruf
+function V(Semaphor s){//Prüfen, ob weitere Prozesse auf den Zutritt zum kritischen Abschnitt warten (also beim Passieren blockiert wurden).
+ if(s.liste.laenge > 0){//Nächsten blockierten Prozesses aus der Warte-schlange entnehmen und dessen Zustand wieder auf „bereit“ setzen.
+  Prozess p := liste.erster;
+  p.status := BEREIT;
+ }else{
+ s.wert++;//Zähler um 1 inkrementieren.
+ }
