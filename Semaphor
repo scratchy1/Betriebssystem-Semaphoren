@@ -19,3 +19,4 @@ function V(Semaphor s){//Prüfen, ob weitere Prozesse auf den Zutritt zum kritis
  }else{
  s.wert++;//Zähler um 1 inkrementieren.
  }
+//Die Funktionen P und V müssen atomar sein, d.h. ihre Bearbeitung darf nicht unterbrochen werden.
